@@ -31,3 +31,13 @@
     transform: rotate(360deg);
   }
 }
+
+#bucket {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(to bottom, white 70%, #00aae4 30%);
+  align-items: center;
+}
+
+.bucket {
+}
