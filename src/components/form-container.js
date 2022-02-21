@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 const FormContainer = () => {
+  const [formState, setFormState] = useState({
+    bucketX: "",
+    bucketY: "",
+    indexZ: "",
+  });
+
   return (
     <div className="container">
       <div className="row align-items-start">
@@ -15,6 +21,13 @@ const FormContainer = () => {
                 className="form-control"
                 placeholder="Input value"
                 pattern="[0-9]*"
+                value={formState.bucketX}
+                onChange={(event) =>
+                  setFormState({
+                    ...formState,
+                    bucketX: event.target.value,
+                  })
+                }
               />
             </div>
           </div>
@@ -30,6 +43,13 @@ const FormContainer = () => {
                 className="form-control"
                 placeholder="Input value"
                 pattern="[0-9]*"
+                value={formState.bucketY}
+                onChange={(event) =>
+                  setFormState({
+                    ...formState,
+                    bucketY: event.target.value,
+                  })
+                }
               />
             </div>
             <div className="row mb-1 align-items-center">
@@ -50,6 +70,13 @@ const FormContainer = () => {
                 className="form-control"
                 placeholder="Input value"
                 pattern="[0-9]*"
+                value={formState.indexZ}
+                onChange={(event) =>
+                  setFormState({
+                    ...formState,
+                    indexZ: event.target.value,
+                  })
+                }
               />
             </div>
           </div>
