@@ -7,6 +7,15 @@ const FormContainer = () => {
     indexZ: "",
   });
 
+  console.log(formState);
+
+  const handledInput = (key, value) => {
+    return setFormState((state) => ({
+      ...state,
+      [key]: value,
+    }));
+  };
+
   return (
     <div className="container">
       <div className="row align-items-start">
@@ -23,10 +32,7 @@ const FormContainer = () => {
                 pattern="[0-9]*"
                 value={formState.bucketX}
                 onChange={(event) =>
-                  setFormState({
-                    ...formState,
-                    bucketX: event.target.value,
-                  })
+                  handledInput("bucketX", event.target.value)
                 }
               />
             </div>
@@ -45,10 +51,7 @@ const FormContainer = () => {
                 pattern="[0-9]*"
                 value={formState.bucketY}
                 onChange={(event) =>
-                  setFormState({
-                    ...formState,
-                    bucketY: event.target.value,
-                  })
+                  handledInput("bucketY", event.target.value)
                 }
               />
             </div>
@@ -71,12 +74,7 @@ const FormContainer = () => {
                 placeholder="Input value"
                 pattern="[0-9]*"
                 value={formState.indexZ}
-                onChange={(event) =>
-                  setFormState({
-                    ...formState,
-                    indexZ: event.target.value,
-                  })
-                }
+                onChange={(event) => handledInput("indexZ", event.target.value)}
               />
             </div>
           </div>
