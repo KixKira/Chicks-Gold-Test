@@ -1,6 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import FormContainer from "./components/form-container";
+import Buckets from "./components/buckets";
 
 function App() {
   return (
@@ -11,18 +12,14 @@ function App() {
           <FormContainer />
         </div>
 
+        <br />
+
         {/*Buckets*/}
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col">
-              <div id="bucket" className="col"></div>
-            </div>
-            <div className="col">
-              <div id="bucket" className="col"></div>
-            </div>
-          </div>
+        <div>
+          <Buckets />
         </div>
-        <br></br>
+
+        <br />
 
         {/* Table */}
         <div className="container">
