@@ -1,6 +1,6 @@
 import React from "react";
 
-const Table = () => {
+const Table = ({ rowsTable }) => {
   return (
     <div className="container">
       <div className="row align-items-center">
@@ -13,11 +13,14 @@ const Table = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Value</td>
-              <td>Value</td>
-              <td>Value</td>
-            </tr>
+            {rowsTable.length > 0 &&
+              rowsTable.map((row, key) => (
+                <tr key={key}>
+                  <td>{row.X}</td>
+                  <td>{row.Y}</td>
+                  <td>{row.instrucction}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

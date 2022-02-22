@@ -1,19 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
+import Button from "react-bootstrap/Button";
 
-const FormContainer = () => {
-  const [formState, setFormState] = useState({
+const FormContainer = ({ calculateOptime }) => {
+  const [formState, setFormState] = React.useState({
     bucketX: "",
     bucketY: "",
     indexZ: "",
   });
-
-  console.log(formState);
 
   const handledInput = (key, value) => {
     return setFormState((state) => ({
       ...state,
       [key]: value,
     }));
+  };
+
+  const validate = (e) => {
+    e.preventDefault();
+    const { bucketX, bucketY, indexZ } = formState;
+    let isValid = true;
+    if (bucketX === "" || bucketX.length === 0) {
+      window.alert("Bucket X field its empty");
+      isValid = false;
+      return;
+    }
+
+    if (bucketY === "" || bucketY.length === 0) {
+      window.alert("Bucket Y field its empty");
+      isValid = false;
+      return;
+    }
+
+    if (indexZ === "" || indexZ.length === 0) {
+      window.alert("Bucket Z field its empty");
+      isValid = false;
+      return;
+    }
+
+    if (isValid) {
+      calculateOptime({ bucketX, bucketY, indexZ });
+    }
   };
 
   return (
@@ -55,11 +81,6 @@ const FormContainer = () => {
                 }
               />
             </div>
-            <div className="row mb-1 align-items-center">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </div>
           </div>
         </div>
         <div className="col">
@@ -80,6 +101,15 @@ const FormContainer = () => {
           </div>
         </div>
       </div>
+      <br />
+      <div className="row mb-1 align-items-center">
+        <div className="col">
+          <Button variant="primary" type="submit" onClick={validate}>
+            Submit
+          </Button>
+        </div>
+      </div>
+      <br />
     </div>
   );
 };
