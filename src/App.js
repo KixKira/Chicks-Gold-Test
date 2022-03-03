@@ -101,7 +101,7 @@ function App() {
     return null;
   };
   const calculateOptime = ({ bucketX, bucketY, indexZ }) => {
-    const result = minSteps(bucketX, bucketY, indexZ);
+    const result = minSteps(Number(bucketX), Number(bucketY), Number(indexZ));
     if ((result && result === -1) || result == null) {
       window.alert("Not solution");
       return;
