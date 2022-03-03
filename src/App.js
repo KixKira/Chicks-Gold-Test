@@ -9,21 +9,21 @@ function App() {
   const [rowsTable, setRows] = React.useState([]);
 
   const gcd = (a, b) => {
-    // funcion para sacar el Maximo comun divisor recursivamente
+    // Function to get the Greatest Common Divisor recursively
     if (b === 0) return a;
     return gcd(b, a % b);
   };
 
-  const llenadoTraslado = (toCap, fromCap, d, nameTo, nameFrom) => {
-    // se llenan las variables, para empezar el proceso
+  const fillTransfer = (toCap, fromCap, d, nameTo, nameFrom) => {
+    // The variables are filled, to start the process
     let from = fromCap;
     let to = 0;
     let cant = 1;
 
-    // se inicializa un array vacio, para guardar los pasos a mostrar.
+    // An empty array is initialized to store the steps to display
     const steps = [];
-    // From: es el bucket que se llena primero
-    // To: es el bucket que se llena segundo
+    // From: It's the first bucket to fill
+    // To: It's the second bucket to fill
     steps.push({
       [nameFrom]: from,
       [nameTo]: to,
@@ -37,7 +37,7 @@ function App() {
       from -= temp;
 
       cant += 1;
-      // Se hace transferencia entre buckets
+      // Transfer between buckets is made
       steps.push({
         [nameFrom]: from,
         [nameTo]: to,
@@ -49,7 +49,7 @@ function App() {
       }
 
       if (from === 0) {
-        // Se llena bucket hasta su limite
+        // Bucket is filled to it's limit
         from = fromCap;
         steps.push({
           [nameFrom]: from,
@@ -60,7 +60,7 @@ function App() {
       }
 
       if (to === toCap) {
-        // Se vacia bucket
+        // Bucket is emptied
         to = 0;
         steps.push({
           [nameFrom]: from,
@@ -74,30 +74,30 @@ function App() {
   };
 
   const minSteps = (x, y, z) => {
-    // Se saca el maximo comun divisor para saber si es posible la operacion
+    // The Greatest Common Divisor is removed to find out if the operation is possible
     if (z % gcd(x, y) !== 0) return -1;
     if (z % gcd(y, x) !== 0) return -1;
 
-    // se realiza el algoritmo de llenado por el Bucket X
-    const startFromX = llenadoTraslado(x, y, z, "X", "Y");
+    // The filling algorithm is performed by Bucket X
+    const startFromX = fillTransfer(x, y, z, "X", "Y");
 
-    // se realiza el algoritmo de llenado por el Bucket Y
-    const startFromY = llenadoTraslado(y, x, z, "Y", "X");
+    // The filling algorithm is performed by Bucket Y
+    const startFromY = fillTransfer(y, x, z, "Y", "X");
 
-    // Se toma el valor minimo de las funciones anteriores
+    // The minimum value of the previous functions is taken
     const minValue = Math.min(startFromX.cant, startFromY.cant);
 
     if (startFromX.cant === minValue) {
-      // Se retornan los pasos del algoritmo
+      // The steps of the algorithm are returned
       return startFromX.steps;
     }
 
     if (startFromY.cant === minValue) {
-      // Se retornan los pasos del algoritmo
+      // The steps of the algorithm are returned
       return startFromY.steps;
     }
 
-    // Algo sucedio, y no retorno nada.
+    // Something happened and nothing returned
     return null;
   };
   const calculateOptime = ({ bucketX, bucketY, indexZ }) => {
